@@ -33,7 +33,7 @@ function createSpecialOffers(data) {
             />
           </div>
           <div class="sales__item-text">
-            <div class="sales__item-title">${title}</div>
+            <h2 class="sales__item-title">${title}</h2>
             <div class="sales__item-rating">Rating <br> <span>${metacriticScore}</span> / 100</div>
             <div class="sales__item-price__wrapper">
               <div class="sales__item-percent">-${parseFloat(savings).toFixed(0)}%</div>
@@ -110,7 +110,7 @@ const debouncedSearch = debounce((value) => {
 
       const html = `
         <div class="catalog__item">
-        <div class="catalog__item-name">${external}</div>
+        <h2 class="catalog__item-name">${external}</h2>
         <div class="catalog__item-img">
         <img src=${thumb} alt=${external}>
         </div>
@@ -153,15 +153,43 @@ const modalRemoveItem = document.querySelector(".modal-add__card-select__item--r
 const modalCardSelect = document.querySelector(".modal-add__card-select");
 const modalCardTitle = document.querySelector(".modal-add__card-title");
 
+const selectedCardInfo = {};
+// Update selectedCardInfo and modalSelectedTitle
+document.addEventListener("click", (event) => {
+  const card = event.target.closest(".catalog__item, .sales__item, .profile-game__item");
+  if (card) updateSelectedInfo(card);
+  updateProfileStats();
+});
+
+function updateSelectedInfo(card) {
+  modal.classList.remove("hidden");
+
+  selectedCardInfo.title = card.querySelector("h2").innerText;
+  selectedCardInfo.img = card.querySelector("img").src;
+
+  modalCardTitle.innerText = selectedCardInfo.title;
+
+  const foundCard = cardsData.find((item) => item.title === selectedCardInfo.title);
+
+  foundCard
+    ? (modalSelectedTitle.innerText = foundCard.selected)
+    : (modalSelectedTitle.innerHTML = "<strong>+</strong>Add to...");
+}
+
 modalCard.addEventListener("click", (event) => {
   if (event.target.matches(".modal-add__card-selected")) {
     modalCardSelect.classList.remove("hidden");
+
+    if (modalSelectedTitle.innerHTML !== "<strong>+</strong>Add to...") {
+      modalRemoveItem.classList.remove("hidden");
+    } else {
+      modalRemoveItem.classList.add("hidden");
+    }
   }
 
   // open categories and delete card from array and counter
   if (event.target.matches(".modal-add__card-select__item")) {
     modalSelectedTitle.innerText = event.target.innerText;
-    modalRemoveItem.classList.remove("hidden");
 
     if (modalSelectedTitle.innerText === modalRemoveItem.innerText) {
       modalSelectedTitle.innerHTML = "<strong>+</strong>Add to...";
@@ -173,8 +201,17 @@ modalCard.addEventListener("click", (event) => {
           break;
         }
       }
+
       modal.classList.add("hidden");
+
       changeStats();
+
+      if (currentFilter !== "All") {
+        const filteredGames = cardsData.filter((item) => item.selected == currentFilter);
+        addGameToProfile(filteredGames);
+      } else {
+        addGameToProfile();
+      }
     }
 
     modalCardSelect.classList.add("hidden");
@@ -204,39 +241,16 @@ modalCard.addEventListener("click", (event) => {
 
     changeStats();
 
+    if (currentFilter !== "All") {
+      const filteredGames = cardsData.filter((item) => item.selected == currentFilter);
+      addGameToProfile(filteredGames);
+    } else {
+      addGameToProfile();
+    }
+
     modal.classList.add("hidden");
 
     saveToLocalStorage();
-  }
-});
-
-const selectedCardInfo = {};
-// Update selectedCardInfo and modalSelectedTitle
-document.addEventListener("click", (event) => {
-  const catalogCard = event.target.closest(".catalog__item");
-  const salesCard = event.target.closest(".sales__item");
-
-  if (catalogCard || salesCard) {
-    modal.classList.remove("hidden");
-
-    if (catalogCard) {
-      selectedCardInfo.title = catalogCard.querySelector(".catalog__item-name").innerText;
-      selectedCardInfo.img = catalogCard.querySelector("img").src;
-    } else if (salesCard) {
-      selectedCardInfo.title = salesCard.querySelector(".sales__item-title").innerText;
-      selectedCardInfo.img = salesCard.querySelector("img").src;
-    }
-
-    modalCardTitle.innerText = selectedCardInfo.title;
-
-    for (const elem of cardsData) {
-      if (elem.title === selectedCardInfo.title) {
-        modalSelectedTitle.innerText = elem.selected;
-        break;
-      } else {
-        modalSelectedTitle.innerHTML = "<strong>+</strong>Add to...";
-      }
-    }
   }
 });
 
@@ -347,7 +361,7 @@ function addGameToProfile(arr = cardsData) {
 
     const html = `
       <div class="profile-game__item">
-        <div class="profile-game__name">${title}</div>
+        <h2 class="profile-game__name">${title}</h2>
         <div class="profile-game__img">
           <img
           src=${img}
@@ -397,8 +411,8 @@ profileGamesFilter.addEventListener("click", (event) => {
     if (currentFilter === "All") {
       addGameToProfile();
     } else {
-      const newArr = cardsData.filter((item) => item.selected == currentFilter);
-      addGameToProfile(newArr);
+      const filteredArr = cardsData.filter((item) => item.selected == currentFilter);
+      addGameToProfile(filteredArr);
     }
   }
 });
@@ -406,9 +420,9 @@ profileGamesFilter.addEventListener("click", (event) => {
 // profile customization
 const profileName = document.querySelector(".profile__person-name");
 const profileNameInput = document.querySelector(".profile__person-name__input");
-console.log(username);
 
 profileName.innerText = username;
+profileNameInput.value = username;
 
 profileName.addEventListener("click", () => {
   profileName.classList.add("hidden");
@@ -417,9 +431,13 @@ profileName.addEventListener("click", () => {
 });
 
 profileNameInput.addEventListener("blur", () => {
-  profileName.classList.remove("hidden");
-  profileName.innerText = profileNameInput.value;
-  profileNameInput.classList.add("hidden");
+  if (profileNameInput.value.trim() !== "") {
+    profileName.innerText = profileNameInput.value;
+    saveToLocalStorage();
+  } else {
+    profileName.innerText = "Enter your name";
+  }
 
-  saveToLocalStorage();
+  profileName.classList.remove("hidden");
+  profileNameInput.classList.add("hidden");
 });
