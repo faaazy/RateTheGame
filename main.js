@@ -333,9 +333,15 @@ function updateProfileStats() {
 }
 
 function addZerosToProfileStat(category, stat, counter) {
-  if (cardsData.length > 99) stat.innerText = counter[category];
-  else if (cardsData.length < 10) stat.innerText = `00${counter[category]}`;
-  else stat.innerText = `0${counter[category]}`;
+  let numberStat = counter[category].toString();
+
+  if (numberStat.length === 1) {
+    numberStat = `00${numberStat}`;
+  } else if (numberStat.length === 2) {
+    numberStat = `0${numberStat}`;
+  }
+
+  stat.innerText = numberStat;
 }
 
 // tabs
