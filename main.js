@@ -138,13 +138,49 @@ let username = "Enter your name";
 function saveToLocalStorage() {
   localStorage.setItem("cardsData", JSON.stringify(cardsData));
   localStorage.setItem("username", profileName.innerText);
+
+  const jsonString = JSON.stringify(cardsData);
+  const blob = new Blob([jsonString], { type: "application/json" });
+
+  const jsonLink = document.querySelector("[data-json-file]");
+  jsonLink.href = URL.createObjectURL(blob);
+  jsonLink.download = "data.json";
 }
 
 if (localStorage.getItem("cardsData")) {
   cardsData = JSON.parse(localStorage.getItem("cardsData"));
-  changeStats();
   username = localStorage.getItem("username");
+  changeStats();
 }
+
+// read json file
+const fileInput = document.getElementById("fileInput");
+
+fileInput.addEventListener("change", (event) => {
+  const file = event.target.files[0];
+
+  if (file) {
+    const reader = new FileReader();
+
+    reader.onload = function (e) {
+      try {
+        const data = JSON.parse(e.target.result);
+        cardsData = data;
+
+        changeStats();
+        updateProfileStats();
+
+        addGameToProfile();
+
+        saveToLocalStorage();
+      } catch (err) {
+        console.error("Error reading file:", err);
+      }
+    };
+
+    reader.readAsText(file);
+  }
+});
 
 const modal = document.querySelector(".modal-add");
 const modalCard = document.querySelector(".modal-add__card");
