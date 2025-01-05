@@ -3,10 +3,16 @@ const getData = async function () {
     `https://www.cheapshark.com/api/1.0/deals?metacritic=80&upperprice=10&sortBy=Savings&lowerPrice=1`
   );
   const data = await res.json();
-  console.log(data);
 
   return data;
 };
+
+async function getGameFromSearch(val) {
+  const res = await fetch(`https://www.cheapshark.com/api/1.0/games?title=${val}&limit=20`);
+  const data = res.json();
+
+  return data;
+}
 
 let itemsCounter = 0;
 function createSpecialOffers(data) {
@@ -67,13 +73,6 @@ function debounce(func, delay) {
     clearTimeout(timer);
     timer = setTimeout(() => func.apply(this, args), delay);
   };
-}
-
-async function getGameFromSearch(val) {
-  const res = await fetch(`https://www.cheapshark.com/api/1.0/games?title=${val}&limit=20`);
-  const data = res.json();
-
-  return data;
 }
 
 const mainElems = document.querySelector("main").children;
@@ -193,6 +192,7 @@ const selectedCardInfo = {};
 // Update selectedCardInfo and modalSelectedTitle
 document.addEventListener("click", (event) => {
   const card = event.target.closest(".catalog__item, .sales__item, .profile-game__item");
+
   if (card) updateSelectedInfo(card);
   updateProfileStats();
 });
@@ -212,7 +212,9 @@ function updateSelectedInfo(card) {
     : (modalSelectedTitle.innerHTML = "<strong>+</strong>Add to...");
 }
 
-modalCard.addEventListener("click", (event) => {
+modal.addEventListener("click", (event) => {
+  if (!event.target.closest(".modal-add__card")) modal.classList.add("hidden");
+
   if (event.target.matches(".modal-add__card-selected")) {
     modalCardSelect.classList.remove("hidden");
 
