@@ -383,13 +383,17 @@ function addZerosToProfileStat(category, stat, counter) {
 }
 
 // tabs
-const tabsBtns = document.querySelectorAll(".profile__tab");
+const tabsBtns = document.querySelectorAll(".profile__nav-item");
 const profileTabs = document.querySelectorAll("[data-profile-tab]");
 
 tabsBtns.forEach((item, index) => {
   item.addEventListener("click", () => {
-    tabsBtns.forEach((item) => item.classList.remove("profile__tab--active"));
+    tabsBtns.forEach((item) =>
+      item.classList.remove("profile__tab--active", "profile__nav-item--active")
+    );
+
     item.classList.add("profile__tab--active");
+    item.classList.add("profile__nav-item--active");
 
     profileTabs.forEach((item) => item.classList.add("hidden"));
     profileTabs[index].classList.remove("hidden");
@@ -484,4 +488,15 @@ profileNameInput.addEventListener("blur", () => {
 
   profileName.classList.remove("hidden");
   profileNameInput.classList.add("hidden");
+});
+
+// burger menu
+const menuIconWrapper = document.querySelector(".menu-icon-wrapper");
+const nav = document.querySelector(".nav");
+
+menuIconWrapper.addEventListener("click", () => {
+  document.querySelector(".menu-icon").classList.toggle("menu-icon-active");
+
+  headerRow.classList.toggle("header__row--mobile");
+  nav.classList.toggle("nav--mobile");
 });

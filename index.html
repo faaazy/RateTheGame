@@ -4,7 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>RateTheGame</title>
-    <link rel="stylesheet" href="./main.css" />
+    <link rel="stylesheet" href="./css/main.css" />
+    <link rel="stylesheet" href="./css/media.css" />
     <script defer src="./main.js"></script>
   </head>
   <body>
@@ -12,7 +13,7 @@
       <div class="container">
         <div class="header__row">
           <div class="logo"><a href="#header">RateTheGame</a></div>
-          <nav>
+          <nav class="nav">
             <div class="nav__item">
               <a href="#!" class="nav__item-link" data-profile-link>Profile</a>
             </div>
@@ -21,6 +22,9 @@
               <img src="./img/search.svg" alt="" class="search__img" />
             </div>
           </nav>
+          <div class="menu-icon-wrapper">
+            <div class="menu-icon"></div>
+          </div>
         </div>
       </div>
     </header>
@@ -115,8 +119,8 @@
         </div>
         <div class="profile__nav">
           <div class="profile__nav-row">
-            <div class="profile__nav-item">
-              <a href="#!" class="profile__tab profile__tab--active">Profile</a>
+            <div class="profile__nav-item profile__nav-item--active profile__tab--active">
+              <a href="#!" class="profile__tab">Profile</a>
             </div>
             <div class="profile__nav-item">
               <a href="#!" class="profile__tab">Games</a>
