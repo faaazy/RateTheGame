@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RateTheGame</title>
+    <link rel="stylesheet" href="./css/main.css" />
+    <link rel="stylesheet" href="./css/media.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
+    <script defer type="module" src="./main.js"></script>
+  </head>
+  <body>
+    <header class="header">
+      <div class="container">
+        <div class="header__row">
+          <div class="logo"><a href="#header">RateTheGame</a></div>
+          <nav class="nav">
+            <div class="nav__item">
+              <a href="#!" class="nav__item-link" data-profile-link>Profile</a>
+            </div>
+            <div class="search">
+              <input class="search__input" type="text" placeholder="Search" />
+              <img src="./img/search.svg" alt="" class="search__img" />
+            </div>
+          </nav>
+          <div class="menu-icon-wrapper">
+            <div class="menu-icon"></div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="info">
+        <div class="container">
+          <div class="info__row">
+            <div class="profile-stats">
+              <div class="profile-stats__grid">
+                <div class="profile-stats__grid-item">
+                  <div class="profile-stats__grid-item__title" data-stats="played">Played</div>
+                  <div class="profile-stats__grid-item__num">0</div>
+                </div>
+                <div class="profile-stats__grid-item">
+                  <div class="profile-stats__grid-item__title" data-stats="playing">Playing</div>
+                  <div class="profile-stats__grid-item__num">0</div>
+                </div>
+                <div class="profile-stats__grid-item">
+                  <div class="profile-stats__grid-item__title" data-stats="reviews">Reviews</div>
+                  <div class="profile-stats__grid-item__num">0</div>
+                </div>
+                <div class="profile-stats__grid-item">
+                  <div class="profile-stats__grid-item__title" data-stats="dropped">Dropped</div>
+                  <div class="profile-stats__grid-item__num">0</div>
+                </div>
+                <div class="profile-stats__grid-item">
+                  <div class="profile-stats__grid-item__title" data-stats="wishlist">Wishlist</div>
+                  <div class="profile-stats__grid-item__num">0</div>
+                </div>
+                <div class="profile-stats__grid-item">
+                  <div class="profile-stats__grid-item__title" data-stats="favorite">Favorites</div>
+                  <div class="profile-stats__grid-item__num">0</div>
+                </div>
+              </div>
+              <div class="profile-stats__title">Profile Stats</div>
+            </div>
+            <div class="game-ratings">
+              <div class="game-ratings__row">
+                <div class="game-ratings__row-item"></div>
+                <div class="game-ratings__row-item"></div>
+                <div class="game-ratings__row-item"></div>
+                <div class="game-ratings__row-item"></div>
+                <div class="game-ratings__row-item"></div>
+                <div class="game-ratings__row-item"></div>
+                <div class="game-ratings__row-item"></div>
+                <div class="game-ratings__row-item"></div>
+                <div class="game-ratings__row-item"></div>
+                <div class="game-ratings__row-item"></div>
+              </div>
+              <div class="game-ratings__stars">
+                <div class="game-ratings__stars-item">1<img src="./img/star.svg" alt="" /></div>
+                <div class="game-ratings__stars-item">10<img src="./img/star.svg" alt="" /></div>
+              </div>
+              <div class="game-ratings__title">Personal Ratings</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="sales">
+        <div class="container">
+          <div class="sales__title">Special Offers</div>
+          <div class="sales__row">
+            <!-- sales items from js -->
+          </div>
+          <div class="sales__show-btn__wrapper">
+            <button class="sales__show-more__btn" data-show-more-btn>Show More</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="game-page hidden">
+        <div class="container">
+          <div class="game-page__row">
+            <div class="game__left">
+              <div class="game__img">
+                <img src="" />
+              </div>
+              <div class="game__modal-btn">Log or Review</div>
+            </div>
+
+            <div class="game__center">
+              <div class="game__title"></div>
+              <div class="game__release"></div>
+
+              <div class="game__rating">
+                <div class="game__rating-count"><span>Steam Reviews </span></div>
+                <div class="game__rating-score"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <div class="catalog hidden">
+      <div class="container">
+        <div class="catalog__title">Catalog</div>
+        <div class="loader hidden"></div>
+        <div class="catalog__grid">
+          <!-- catalog items from js -->
+        </div>
+      </div>
+    </div>
+
+    <div class="profile hidden">
+      <div class="container">
+        <div class="profile__nav">
+          <div class="profile__nav-row">
+            <div class="profile__nav-item profile__nav-item--active profile__tab--active">
+              <a href="#!" class="profile__tab">Profile</a>
+            </div>
+            <div class="profile__nav-item">
+              <a href="#!" class="profile__tab">Games</a>
+            </div>
+            <div class="profile__nav-item">
+              <a href="#!" class="profile__tab">Reviews</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="profile__stats" data-profile-tab>
+          <div class="profile__stats-row">
+            <div class="profile__stats-item">
+              <div class="profile__stats-item__num" data-profile="wishlist">000</div>
+              <div class="profile__stats-item__name">Games Wishlist</div>
+            </div>
+            <div class="profile__stats-item">
+              <div class="profile__stats-item__num" data-profile="total">000</div>
+              <div class="profile__stats-item__name">Total Games Played</div>
+            </div>
+            <div class="profile__stats-item">
+              <div class="profile__stats-item__num" data-profile="reviews">000</div>
+              <div class="profile__stats-item__name">Games Reviews</div>
+            </div>
+          </div>
+          <div class="profile__save">
+            <a data-json-file>Click here to download save file</a>
+            <div class="profile__save-file">
+              <label for="fileInput">Drop your data file to return games</label>
+              <input type="file" id="fileInput" />
+            </div>
+          </div>
+        </div>
+
+        <div class="profile__games hidden" data-profile-tab>
+          <div class="profile__games-filter">
+            <div class="profile__games-filter__item profile__games-filter__item--active">All</div>
+            <div class="profile__games-filter__item">Played</div>
+            <div class="profile__games-filter__item">Playing</div>
+            <div class="profile__games-filter__item">Dropped</div>
+            <div class="profile__games-filter__item">Wishlist</div>
+            <div class="profile__games-filter__item">Favorite</div>
+          </div>
+          <div class="profile__games-grid">
+            <!-- profile game from js -->
+          </div>
+        </div>
+
+        <div class="profile__reviews hidden" data-profile-tab>
+          <div class="profile__reviews-row">
+            <!--  -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-add hidden">
+      <div class="modal-add__card">
+        <div class="modal-add__card-title"></div>
+        <div class="modal-add__card-row">
+          <div class="modal-add__card-left">
+            <div class="modal-add__card-img">
+              <img src="" alt="" />
+            </div>
+
+            <ul class="modal-add__card-select">
+              <li class="modal-add__card-select__item">
+                <i class="fa-solid fa-gamepad"></i>Played
+              </li>
+              <li class="modal-add__card-select__item"><i class="fa-solid fa-play"></i>Playing</li>
+              <li class="modal-add__card-select__item">
+                <i class="fa-solid fa-circle-xmark"></i>Dropped
+              </li>
+              <li class="modal-add__card-select__item"><i class="fa-solid fa-gift"></i>Wishlist</li>
+              <li class="modal-add__card-select__item">
+                <i class="fa-solid fa-heart"></i>Favorite
+              </li>
+            </ul>
+
+            <div class="modal-add__card-clear">Clear</div>
+          </div>
+
+          <div class="modal-add__card-right">
+            <div class="rating-box">
+              <div class="rating-box__title">Rating</div>
+              <div class="rating-box__stars">
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+              </div>
+            </div>
+
+            <div class="modal-review">
+              <div class="modal-review__title">Review</div>
+              <textarea
+                class="modal-review__text"
+                rows="7"
+                cols="40"
+                maxlength="500"
+                placeholder="How you feel about this game..."
+              ></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal__btns">
+          <button class="modal-add__card-cancel">Cancel</button>
+          <button class="modal-add__card-btn">Add to list</button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
