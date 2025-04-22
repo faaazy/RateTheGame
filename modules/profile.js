@@ -3,10 +3,12 @@ export function initProfile(cardsData) {
   const catalog = document.querySelector(".catalog");
   const profile = document.querySelector(".profile");
   const headerRow = document.querySelector(".header__row");
+  const gamePage = document.querySelector(".game-page");
 
   headerRow.addEventListener("click", (event) => {
     if (event.target.closest(".logo") || event.target.closest(".nav__item")) {
       catalog.classList.add("hidden");
+      gamePage.classList.add("hidden");
       headerRow.classList.remove("header__row--mobile");
       document.querySelector(".nav").classList.remove("nav--mobile");
       document.querySelector(".menu-icon").classList.remove("menu-icon-active");
@@ -22,10 +24,9 @@ export function initProfile(cardsData) {
     if (event.target.closest(".logo")) {
       profile.classList.add("hidden");
       for (const elem of mainElems) {
-        elem.classList.contains("game-page")
-          ? elem.classList.add("hidden")
-          : elem.classList.remove("hidden");
+        elem.classList.remove("hidden");
       }
+      gamePage.classList.add("hidden");
     }
   });
 
