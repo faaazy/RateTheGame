@@ -44,11 +44,26 @@
           <div class="logo"><a href="#header">RateTheGame</a></div>
           <nav class="nav">
             <div class="nav__item">
-              <a href="#!" class="nav__item-link" data-profile-link>Profile</a>
+              <a
+                href="#!"
+                class="nav__item-link"
+                data-profile-link
+                data-lang="nav-profile"
+                >Profile</a
+              >
             </div>
             <div class="search">
-              <input class="search__input" type="text" placeholder="Search" />
+              <input
+                class="search__input"
+                type="text"
+                placeholder="Search"
+                data-lang="search"
+              />
               <img src="./img/search.svg" alt="" class="search__img" />
+            </div>
+            <div class="language-switcher">
+              <button class="lang-btn active" data-lang="en">EN</button>
+              <button class="lang-btn" data-lang="ru">RU</button>
             </div>
           </nav>
           <div class="menu-icon-wrapper">
@@ -61,8 +76,10 @@
     <main>
       <section class="hero">
         <div class="container">
-          <h1>RateTheGame - Оценивайте и отслеживайте ваши игры</h1>
-          <p>
+          <h1 data-lang="hero-title">
+            RateTheGame - Оценивайте и отслеживайте ваши игры
+          </h1>
+          <p data-lang="hero-description">
             Ведущая платформа для оценки видеоигр, написания рецензий и
             управления игровой коллекцией. Отслеживайте пройденные игры,
             составляйте списки желаний и делитесь своими оценками.
@@ -130,7 +147,9 @@
                   <div class="profile-stats__grid-item__num">0</div>
                 </div>
               </div>
-              <div class="profile-stats__title">Profile Stats</div>
+              <div class="profile-stats__title" data-lang="profile-stats">
+                Profile Stats
+              </div>
             </div>
             <div class="game-ratings">
               <div class="game-ratings__row">
@@ -153,7 +172,9 @@
                   10<img src="./img/star.svg" alt="" />
                 </div>
               </div>
-              <div class="game-ratings__title">Personal Ratings</div>
+              <div class="game-ratings__title" data-lang="personal-ratings">
+                Personal Ratings
+              </div>
             </div>
           </div>
         </div>
@@ -161,12 +182,16 @@
 
       <div class="sales">
         <div class="container">
-          <div class="sales__title">Special Offers</div>
+          <div class="sales__title" data-lang="sales-title">Special Offers</div>
           <div class="sales__row">
             <!-- sales items from js -->
           </div>
           <div class="sales__show-btn__wrapper">
-            <button class="sales__show-more__btn" data-show-more-btn>
+            <button
+              class="sales__show-more__btn"
+              data-show-more-btn
+              data-lang="show-more"
+            >
               Show More
             </button>
           </div>
@@ -180,7 +205,9 @@
               <div class="game__img">
                 <img src="" />
               </div>
-              <div class="game__modal-btn">Log or Review</div>
+              <div class="game__modal-btn" data-lang="review-btn">
+                Log or Review
+              </div>
             </div>
 
             <div class="game__center">
@@ -201,7 +228,7 @@
 
     <div class="catalog hidden">
       <div class="container">
-        <div class="catalog__title">Catalog</div>
+        <div class="catalog__title" data-lang="catalog-title">Catalog</div>
         <div class="loader hidden"></div>
         <div class="catalog__grid">
           <!-- catalog items from js -->
@@ -216,13 +243,19 @@
             <div
               class="profile__nav-item profile__nav-item--active profile__tab--active"
             >
-              <a href="#!" class="profile__tab">Profile</a>
+              <a href="#!" class="profile__tab" data-lang="profile-title"
+                >Profile</a
+              >
             </div>
             <div class="profile__nav-item">
-              <a href="#!" class="profile__tab">Games</a>
+              <a href="#!" class="profile__tab" data-lang="profile-games"
+                >Games</a
+              >
             </div>
             <div class="profile__nav-item">
-              <a href="#!" class="profile__tab">Reviews</a>
+              <a href="#!" class="profile__tab" data-lang="profile-reviews"
+                >Reviews</a
+              >
             </div>
           </div>
         </div>
@@ -233,25 +266,47 @@
               <div class="profile__stats-item__num" data-profile="wishlist">
                 000
               </div>
-              <div class="profile__stats-item__name">Games Wishlist</div>
+              <div
+                class="profile__stats-item__name"
+                data-lang="profile-stats-wishlist"
+                ]
+              >
+                Games Wishlist
+              </div>
             </div>
             <div class="profile__stats-item">
               <div class="profile__stats-item__num" data-profile="total">
                 000
               </div>
-              <div class="profile__stats-item__name">Total Games Played</div>
+              <div
+                class="profile__stats-item__name"
+                data-lang="profile-stats-total"
+                ]
+              >
+                Total Games Played
+              </div>
             </div>
             <div class="profile__stats-item">
               <div class="profile__stats-item__num" data-profile="reviews">
                 000
               </div>
-              <div class="profile__stats-item__name">Games Reviews</div>
+              <div
+                class="profile__stats-item__name"
+                data-lang="profile-stats-reviews"
+                ]
+              >
+                Games Reviews
+              </div>
             </div>
           </div>
           <div class="profile__save">
-            <a data-json-file>Click here to download save file</a>
+            <a data-json-file data-lang="profile-stats-download" ]
+              >Click here to download save file</a
+            >
             <div class="profile__save-file">
-              <label for="fileInput">Drop your data file to return games</label>
+              <label for="fileInput" data-lang="profile-stats-file" ]
+                >Drop your data file to return games</label
+              >
               <input type="file" id="fileInput" />
             </div>
           </div>
@@ -261,14 +316,40 @@
           <div class="profile__games-filter">
             <div
               class="profile__games-filter__item profile__games-filter__item--active"
+              data-lang="profile-filter-all"
             >
               All
             </div>
-            <div class="profile__games-filter__item">Played</div>
-            <div class="profile__games-filter__item">Playing</div>
-            <div class="profile__games-filter__item">Dropped</div>
-            <div class="profile__games-filter__item">Wishlist</div>
-            <div class="profile__games-filter__item">Favorite</div>
+            <div
+              class="profile__games-filter__item"
+              data-lang="profile-filter-played"
+            >
+              Played
+            </div>
+            <div
+              class="profile__games-filter__item"
+              data-lang="profile-filter-playing"
+            >
+              Playing
+            </div>
+            <div
+              class="profile__games-filter__item"
+              data-lang="profile-filter-dropped"
+            >
+              Dropped
+            </div>
+            <div
+              class="profile__games-filter__item"
+              data-lang="profile-filter-wishlist"
+            >
+              Wishlist
+            </div>
+            <div
+              class="profile__games-filter__item"
+              data-lang="profile-filter-favorite"
+            >
+              Favorite
+            </div>
           </div>
           <div class="profile__games-grid">
             <!-- profile game from js -->
@@ -294,28 +375,37 @@
 
             <ul class="modal-add__card-select">
               <li class="modal-add__card-select__item">
-                <i class="fa-solid fa-gamepad"></i>Played
+                <i class="fa-solid fa-gamepad"></i
+                ><span data-lang="modal-played">Played</span>
               </li>
               <li class="modal-add__card-select__item">
-                <i class="fa-solid fa-play"></i>Playing
+                <i class="fa-solid fa-play"></i
+                ><span data-lang="modal-playing">Playing</span>
               </li>
               <li class="modal-add__card-select__item">
-                <i class="fa-solid fa-circle-xmark"></i>Dropped
+                <i class="fa-solid fa-circle-xmark"></i
+                ><span data-lang="modal-dropped">Dropped</span>
               </li>
               <li class="modal-add__card-select__item">
-                <i class="fa-solid fa-gift"></i>Wishlist
+                <i class="fa-solid fa-gift"></i
+                ><span data-lang="modal-wishlist">Wishlist</span>
               </li>
               <li class="modal-add__card-select__item">
-                <i class="fa-solid fa-heart"></i>Favorite
+                <i class="fa-solid fa-heart"></i
+                ><span data-lang="modal-favorite">Favorite</span>
               </li>
             </ul>
 
-            <div class="modal-add__card-clear">Clear</div>
+            <div class="modal-add__card-clear" data-lang="modal-clear">
+              Clear
+            </div>
           </div>
 
           <div class="modal-add__card-right">
             <div class="rating-box">
-              <div class="rating-box__title">Rating</div>
+              <div class="rating-box__title" data-lang="modal-rating">
+                Rating
+              </div>
               <div class="rating-box__stars">
                 <i class="fa-solid fa-star"></i>
                 <i class="fa-solid fa-star"></i>
@@ -331,21 +421,28 @@
             </div>
 
             <div class="modal-review">
-              <div class="modal-review__title">Review</div>
+              <div class="modal-review__title" data-lang="modal-review">
+                Review
+              </div>
               <textarea
                 class="modal-review__text"
                 rows="7"
                 cols="40"
                 maxlength="500"
                 placeholder="How you feel about this game..."
+                data-lang="modal-placeholder"
               ></textarea>
             </div>
           </div>
         </div>
 
         <div class="modal__btns">
-          <button class="modal-add__card-cancel">Cancel</button>
-          <button class="modal-add__card-btn">Add to list</button>
+          <button class="modal-add__card-cancel" data-lang="modal-cancel">
+            Cancel
+          </button>
+          <button class="modal-add__card-btn" data-lang="modal-add">
+            Add to list
+          </button>
         </div>
       </div>
     </div>

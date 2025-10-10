@@ -1,11 +1,28 @@
 import { initRatingBars } from "./ratingBars.js";
 
-export function initModal(cardsData, saveToLocalStorage) {
+export function initModal(cardsData, saveToLocalStorage, translations) {
   const modal = document.querySelector(".modal-add");
   const modalCardTitle = document.querySelector(".modal-add__card-title");
   const modalCardImg = document.querySelector(".modal-add__card-img img");
   const modalReview = document.querySelector(".modal-review__text");
-  const modalSelectedCategories = document.querySelectorAll(".modal-add__card-select__item");
+  const modalSelectedCategories = document.querySelectorAll(
+    ".modal-add__card-select__item"
+  );
+
+  const currentLang = localStorage.getItem("preferred-language") || "en";
+  const {
+    played,
+    playing,
+    dropped,
+    wishlist,
+    favorite,
+    clear,
+    rating,
+    review,
+    placeholder,
+    cancel,
+    add,
+  } = translations[currentLang].modal;
 
   const selectedCardInfo = {};
 
@@ -13,10 +30,25 @@ export function initModal(cardsData, saveToLocalStorage) {
   stars.forEach((star, index1) => {
     star.addEventListener("click", () => {
       stars.forEach((star, index2) => {
-        index1 >= index2 ? star.classList.add("active") : star.classList.remove("active");
+        index1 >= index2
+          ? star.classList.add("active")
+          : star.classList.remove("active");
       });
     });
   });
+
+  document.querySelector('[data-lang="modal-played"]').textContent = played;
+  document.querySelector('[data-lang="modal-playing"]').textContent = playing;
+  document.querySelector('[data-lang="modal-dropped"]').textContent = dropped;
+  document.querySelector('[data-lang="modal-wishlist"]').textContent = wishlist;
+  document.querySelector('[data-lang="modal-favorite"]').textContent = favorite;
+  document.querySelector('[data-lang="modal-clear"]').textContent = clear;
+  document.querySelector('[data-lang="modal-rating"]').textContent = rating;
+  document.querySelector('[data-lang="modal-review"]').textContent = review;
+  document.querySelector('[data-lang="modal-placeholder"]').textContent =
+    placeholder;
+  document.querySelector('[data-lang="modal-cancel"]').textContent = cancel;
+  document.querySelector('[data-lang="modal-add"]').textContent = add;
 
   function updateSelectedInfo(card) {
     const modalGameBtn = document.querySelector(".game__modal-btn");
@@ -30,7 +62,9 @@ export function initModal(cardsData, saveToLocalStorage) {
     modalCardTitle.innerText = selectedCardInfo.title;
     modalCardImg.src = selectedCardInfo.img;
 
-    const foundCard = cardsData.find((item) => item.title === selectedCardInfo.title);
+    const foundCard = cardsData.find(
+      (item) => item.title === selectedCardInfo.title
+    );
 
     if (foundCard && "review" in foundCard && foundCard.review !== undefined) {
       modalReview.value = foundCard.review;
@@ -130,10 +164,13 @@ export function initModal(cardsData, saveToLocalStorage) {
   }
 
   modal.addEventListener("click", (event) => {
-    if (!event.target.closest(".modal-add__card")) modal.classList.add("hidden");
+    if (!event.target.closest(".modal-add__card"))
+      modal.classList.add("hidden");
 
     if (event.target.matches(".modal-add__card-select__item")) {
-      modalSelectedCategories.forEach((item) => item.classList.remove("active"));
+      modalSelectedCategories.forEach((item) =>
+        item.classList.remove("active")
+      );
       event.target.classList.add("active");
     }
 
@@ -143,7 +180,9 @@ export function initModal(cardsData, saveToLocalStorage) {
     }
 
     if (event.target.matches(".modal-add__card-clear")) {
-      modalSelectedCategories.forEach((item) => item.classList.remove("active"));
+      modalSelectedCategories.forEach((item) =>
+        item.classList.remove("active")
+      );
       stars.forEach((item) => item.classList.remove("active"));
     }
 
@@ -153,7 +192,9 @@ export function initModal(cardsData, saveToLocalStorage) {
   });
 
   document.addEventListener("click", (event) => {
-    const card = event.target.closest(".catalog__item, .sales__item, .profile-game__item");
+    const card = event.target.closest(
+      ".catalog__item, .sales__item, .profile-game__item"
+    );
     if (!card) return;
 
     updateSelectedInfo(card);

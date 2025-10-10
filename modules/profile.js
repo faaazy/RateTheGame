@@ -5,6 +5,30 @@ export function initProfile(cardsData) {
   const headerRow = document.querySelector(".header__row");
   const gamePage = document.querySelector(".game-page");
 
+  function getEnglishStatus(russianStatus) {
+    const statusMap = {
+      Все: "All",
+      Пройдено: "Played",
+      Играю: "Playing",
+      Брошено: "Dropped",
+      Желаемое: "Wishlist",
+      Избранное: "Favorite",
+    };
+    return statusMap[russianStatus] || russianStatus;
+  }
+
+  function getRussianStatus(englishStatus) {
+    const statusMap = {
+      All: "Все",
+      Played: "Пройдено",
+      Playing: "Играю",
+      Dropped: "Брошено",
+      Wishlist: "Желаемое",
+      Favorite: "Избранное",
+    };
+    return statusMap[englishStatus] || englishStatus;
+  }
+
   headerRow.addEventListener("click", (event) => {
     if (event.target.closest(".logo") || event.target.closest(".nav__item")) {
       catalog.classList.add("hidden");
@@ -36,7 +60,10 @@ export function initProfile(cardsData) {
   tabsBtns.forEach((item, index) => {
     item.addEventListener("click", () => {
       tabsBtns.forEach((item) =>
-        item.classList.remove("profile__tab--active", "profile__nav-item--active")
+        item.classList.remove(
+          "profile__tab--active",
+          "profile__nav-item--active"
+        )
       );
 
       item.classList.add("profile__tab--active");
@@ -56,50 +83,86 @@ export function initProfile(cardsData) {
 
   profileGamesFilter.addEventListener("click", (event) => {
     if (event.target.matches(".profile__games-filter__item")) {
-      const profileGamesFilterItems = document.querySelectorAll(".profile__games-filter__item");
+      const profileGamesFilterItems = document.querySelectorAll(
+        ".profile__games-filter__item"
+      );
 
       profileGamesFilterItems.forEach((item) =>
         item.classList.remove("profile__games-filter__item--active")
       );
 
       event.target.classList.add("profile__games-filter__item--active");
-      currentFilter = event.target.innerText;
+
+      const russianFilter = event.target.innerText;
+      currentFilter = getEnglishStatus(russianFilter);
 
       if (currentFilter === "All") {
         addGameToProfile(cardsData);
       } else {
-        const filteredArr = cardsData.filter((item) => item.selected == currentFilter);
+        const filteredArr = cardsData.filter(
+          (item) => item.selected == currentFilter
+        );
         addGameToProfile(filteredArr);
       }
     }
   });
 
   function applyCurrentFilter() {
-    const profileGamesFilterItems = document.querySelectorAll(".profile__games-filter__item");
+    const profileGamesFilterItems = document.querySelectorAll(
+      ".profile__games-filter__item"
+    );
     profileGamesFilterItems.forEach((item) =>
       item.classList.remove("profile__games-filter__item--active")
     );
 
+    const currentLang = document.documentElement.getAttribute("lang") || "en";
+
+    let filterTextToFind;
+    if (currentLang === "ru") {
+      filterTextToFind = getRussianStatus(currentFilter);
+    } else {
+      filterTextToFind = getEnglishStatusForDisplay(currentFilter);
+    }
+
     const activeFilter = Array.from(profileGamesFilterItems).find(
-      (item) => item.innerText === currentFilter
+      (item) => item.innerText === filterTextToFind
     );
 
-    if (activeFilter) activeFilter.classList.add("profile__games-filter__item--active");
+    if (activeFilter)
+      activeFilter.classList.add("profile__games-filter__item--active");
 
     if (currentFilter === "All") {
       addGameToProfile(cardsData);
     } else {
-      const filteredGames = cardsData.filter((item) => item.selected == currentFilter);
+      const filteredGames = cardsData.filter(
+        (item) => item.selected == currentFilter
+      );
       addGameToProfile(filteredGames);
     }
   }
 
+  function getEnglishStatusForDisplay(englishStatus) {
+    const statusMap = {
+      All: "All",
+      Played: "Played",
+      Playing: "Playing",
+      Dropped: "Dropped",
+      Wishlist: "Wishlist",
+      Favorite: "Favorite",
+    };
+    return statusMap[englishStatus] || englishStatus;
+  }
+
   function addGameToProfile(arr = cardsData) {
-    const profileGamesContainer = document.querySelector(".profile__games-grid");
+    const profileGamesContainer = document.querySelector(
+      ".profile__games-grid"
+    );
     profileGamesContainer.innerHTML = "";
 
     for (const item of arr) {
       const { img, selected, title } = item;
+
+      const russianStatus = getRussianStatus(selected);
 
       const html = `
           <div class="profile-game__item">
@@ -107,7 +170,7 @@ export function initProfile(cardsData) {
             <div class="profile-game__img">
               <img src=${img} alt=${title}>
             </div>
-            <div class="profile-game__selected">${selected}</div>
+            <div class="profile-game__selected">${russianStatus}</div>
           </div>
         `;
 
@@ -116,7 +179,9 @@ export function initProfile(cardsData) {
   }
 
   function addReviewToProfile(arr = cardsData) {
-    const profileReviewsContainer = document.querySelector(".profile__reviews-row");
+    const profileReviewsContainer = document.querySelector(
+      ".profile__reviews-row"
+    );
     profileReviewsContainer.innerHTML = "";
 
     for (const item of arr) {
@@ -151,32 +216,41 @@ export function initProfile(cardsData) {
   const profileStats = document.querySelectorAll(".profile__stats-item");
 
   function updateProfileStats() {
+    const profileStatsCounter = {
+      total: 0,
+      wishlist: 0,
+      reviews: 0,
+    };
+
+    for (const card of cardsData) {
+      if (
+        card.selected === "Played" ||
+        card.selected === "Dropped" ||
+        card.selected === "Favorite"
+      ) {
+        profileStatsCounter.total += 1;
+      }
+
+      if (card.selected === "Wishlist") {
+        profileStatsCounter.wishlist += 1;
+      }
+
+      if (card.review && card.review.trim() !== "") {
+        profileStatsCounter.reviews += 1;
+      }
+    }
+
+    // Обновляем DOM
     profileStats.forEach((item) => {
-      const profileStatsCounter = {
-        total: 0,
-        wishlist: 0,
-        reviews: 0,
-      };
       const profileStatNum = item.querySelector(".profile__stats-item__num");
+      const category = profileStatNum.dataset.profile;
 
-      for (const card of cardsData) {
-        if (
-          card.selected === "Played" ||
-          card.selected === "Dropped" ||
-          card.selected === "Favorite"
-        ) {
-          profileStatsCounter.total += 1;
-        } else if (card.selected === "Wishlist") {
-          profileStatsCounter.wishlist += 1;
-        }
-      }
-
-      if (profileStatNum.dataset.profile === "total") {
+      if (category === "total") {
         addZerosToProfileStat("total", profileStatNum, profileStatsCounter);
-      }
-
-      if (profileStatNum.dataset.profile === "wishlist") {
+      } else if (category === "wishlist") {
         addZerosToProfileStat("wishlist", profileStatNum, profileStatsCounter);
+      } else if (category === "reviews") {
+        addZerosToProfileStat("reviews", profileStatNum, profileStatsCounter);
       }
     });
   }
@@ -208,11 +282,19 @@ export function initProfile(cardsData) {
     changeStats(cardsData);
 
     if (currentFilter !== "All") {
-      const filteredGames = cardsData.filter((item) => item.selected == currentFilter);
+      const filteredGames = cardsData.filter(
+        (item) => item.selected == currentFilter
+      );
       addGameToProfile(filteredGames);
     } else {
       addGameToProfile(cardsData);
     }
+  });
+
+  document.addEventListener("languageChanged", () => {
+    applyCurrentFilter();
+    updateProfileStats();
+    changeStats(cardsData);
   });
 
   updateProfileStats();
@@ -220,17 +302,53 @@ export function initProfile(cardsData) {
 }
 
 function changeStats(cardsData) {
-  const profileStatsTitles = document.querySelectorAll(".profile-stats__grid-item__title");
+  const profileStatsTitles = document.querySelectorAll(
+    ".profile-stats__grid-item__title"
+  );
 
   for (const profileStatTitle of profileStatsTitles) {
     profileStatTitle.nextElementSibling.innerText = 0;
   }
 
+  const currentLang = document.documentElement.getAttribute("lang") || "en";
+
+  const statsMap = {
+    ru: {
+      played: "Пройдено",
+      playing: "Играю",
+      dropped: "Брошено",
+      wishlist: "Желаемое",
+      favorite: "Избранное",
+      reviews: "Рецензии",
+    },
+    en: {
+      played: "Played",
+      playing: "Playing",
+      dropped: "Dropped",
+      wishlist: "Wishlist",
+      favorite: "Favorite",
+      reviews: "Reviews",
+    },
+  };
+
   cardsData.forEach((item) => {
     for (const profileStatTitle of profileStatsTitles) {
-      if (item.selected.toLowerCase() === profileStatTitle.dataset.stats.toLowerCase()) {
-        profileStatTitle.nextElementSibling.innerText =
-          parseInt(profileStatTitle.nextElementSibling.innerText) + 1;
+      const englishKey = profileStatTitle.dataset.stats.toLowerCase();
+
+      const expectedText = statsMap[currentLang]?.[englishKey];
+
+      if (profileStatTitle.textContent === expectedText) {
+        if (englishKey === "reviews") {
+          if (item.review && item.review.trim() !== "") {
+            profileStatTitle.nextElementSibling.innerText =
+              parseInt(profileStatTitle.nextElementSibling.innerText) + 1;
+          }
+        } else {
+          if (item.selected.toLowerCase() === englishKey) {
+            profileStatTitle.nextElementSibling.innerText =
+              parseInt(profileStatTitle.nextElementSibling.innerText) + 1;
+          }
+        }
       }
     }
   });

@@ -45,9 +45,17 @@
   .catalog__grid {
     grid-template-columns: repeat(3, 1fr);
   }
-  /* .profile__reviews-item__content-text {
-    max-width: 450px;
-  } */
+}
+
+@media (max-width: 900px) {
+  .nav {
+    column-gap: 25px;
+  }
+
+  .search {
+    padding: 10px;
+    max-width: 200px;
+  }
 }
 
 @media (max-width: 768px) {
@@ -121,6 +129,10 @@
   }
   .profile__reviews-item__content-rating {
     margin-bottom: 15px;
+  }
+  .search {
+    padding: 10px 45px 10px 10px;
+    max-width: unset;
   }
 }
 @media (max-width: 600px) {

@@ -1,7 +1,7 @@
 export function initLocalStorage() {
   let cardsData = [];
 
-  function saveToLocalStorage(cardsData, username) {
+  function saveToLocalStorage(cardsData) {
     localStorage.setItem("cardsData", JSON.stringify(cardsData));
 
     const jsonString = JSON.stringify(cardsData);

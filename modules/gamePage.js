@@ -1,4 +1,4 @@
-export function initGamePage(getGameData) {
+export function initGamePage(getGameData, translations) {
   // handle game click
   const mainElems = document.querySelector("main").children;
   const headerRow = document.querySelector(".header__row");
@@ -8,6 +8,9 @@ export function initGamePage(getGameData) {
 
   document.addEventListener("gameClicked", (event) => {
     const selectedGame = event.detail.selectedReturnGame;
+    const currentLang = localStorage.getItem("preferred-language") || "en";
+    const { reviewBtn, steamReviews, released } =
+      translations[currentLang].gamePage;
 
     getGameData(selectedGame.title).then((data) => {
       let currGame;
@@ -27,16 +30,22 @@ export function initGamePage(getGameData) {
       const gamePageImg = document.querySelector(".game-page .game__img img"),
         gamePageTitle = document.querySelector(".game-page .game__title"),
         gamePageReleased = document.querySelector(".game-page .game__release"),
-        gamePageCount = document.querySelector(".game-page .game__rating-count"),
-        gamePageScore = document.querySelector(".game-page .game__rating-score");
+        gamePageCount = document.querySelector(
+          ".game-page .game__rating-count"
+        ),
+        gamePageScore = document.querySelector(
+          ".game-page .game__rating-score"
+        );
 
       gamePageReleased.innerHTML = "";
       gamePageCount.innerHTML = "";
 
       gamePageImg.src = currGame.thumb;
       gamePageTitle.innerText = currGame.title;
-      gamePageReleased.innerHTML = `<span>Released on </span>${formatter.format(gameDate)}`;
-      gamePageCount.innerHTML = `<span>Steam Reviews </span>${currGame.steamRatingCount}`;
+      gamePageReleased.innerHTML = `<span>${released} </span>${formatter.format(
+        gameDate
+      )}`;
+      gamePageCount.innerHTML = `<span>${steamReviews} </span>${currGame.steamRatingCount}`;
       gamePageScore.innerText = currGame.steamRatingPercent + "%";
 
       for (const elem of mainElems) {
@@ -45,6 +54,8 @@ export function initGamePage(getGameData) {
         elem.classList.add("hidden");
       }
       gamePage.classList.remove("hidden");
+      document.querySelector('[data-lang="review-btn"]').textContent =
+        reviewBtn;
     });
 
     headerRow.addEventListener("click", (event) => {
