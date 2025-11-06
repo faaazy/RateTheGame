@@ -34,7 +34,7 @@ export function initSales(getData) {
       const html = `
           <div class="sales__item">
             <div class="sales__item-img">
-              <img src="${thumb}" alt="${title}" />
+              <img loading="lazy" src="${thumb}" alt="${title}" />
             </div>
             <div class="sales__item-text">
               <h2 class="sales__item-title">${title}</h2>
@@ -54,3 +54,4 @@ export function initSales(getData) {
     }
   }
 }
+
