@@ -46,10 +46,10 @@
     <header class="header">
       <div class="container">
         <div class="header__row">
-          <div class="logo"><a href="#header">RateTheGame</a></div>
+          <div class="logo"><a href="#home/">RateTheGame</a></div>
           <nav class="nav">
             <div class="nav__item">
-              <a href="#!" class="nav__item-link" data-profile-link data-lang="nav-profile">Profile</a>
+              <a href="#/profile" class="nav__item-link" data-profile-link data-lang="nav-profile">Profile</a>
             </div>
             <div class="search">
               <input class="search__input" type="text" placeholder="Search" data-lang="search" />
@@ -84,27 +84,27 @@
             <div class="profile-stats">
               <div class="profile-stats__grid">
                 <div class="profile-stats__grid-item">
-                  <h5 class="profile-stats__grid-item__title" data-stats="played">Played</h5>
+                  <div class="profile-stats__grid-item__title" data-stats="played">Played</div>
                   <div class="profile-stats__grid-item__num">0</div>
                 </div>
                 <div class="profile-stats__grid-item">
-                  <h5 class="profile-stats__grid-item__title" data-stats="playing">Playing</h5>
+                  <div class="profile-stats__grid-item__title" data-stats="playing">Playing</div>
                   <div class="profile-stats__grid-item__num">0</div>
                 </div>
                 <div class="profile-stats__grid-item">
-                  <h5 class="profile-stats__grid-item__title" data-stats="reviews">Reviews</h5>
+                  <div class="profile-stats__grid-item__title" data-stats="reviews">Reviews</div>
                   <div class="profile-stats__grid-item__num">0</div>
                 </div>
                 <div class="profile-stats__grid-item">
-                  <h5 class="profile-stats__grid-item__title" data-stats="dropped">Dropped</h5>
+                  <div class="profile-stats__grid-item__title" data-stats="dropped">Dropped</div>
                   <div class="profile-stats__grid-item__num">0</div>
                 </div>
                 <div class="profile-stats__grid-item">
-                  <h5 class="profile-stats__grid-item__title" data-stats="wishlist">Wishlist</h5>
+                  <div class="profile-stats__grid-item__title" data-stats="wishlist">Wishlist</div>
                   <div class="profile-stats__grid-item__num">0</div>
                 </div>
                 <div class="profile-stats__grid-item">
-                  <h5 class="profile-stats__grid-item__title" data-stats="favorite">Favorites</h5>
+                  <div class="profile-stats__grid-item__title" data-stats="favorite">Favorites</div>
                   <div class="profile-stats__grid-item__num">0</div>
                 </div>
               </div>
@@ -135,7 +135,7 @@
 
       <section class="sales">
         <div class="container">
-          <h2 class="sales__title" data-lang="sales-title">Special Offers</h2>
+          <h2 class="sales__title" data-lang="sales-title">Special Games Offers</h2>
           <div class="sales__row">
             <!-- sales items from js -->
           </div>
@@ -188,13 +188,13 @@
         <div class="profile__nav">
           <div class="profile__nav-row">
             <div class="profile__nav-item profile__nav-item--active profile__tab--active">
-              <a href="#!" class="profile__tab" data-lang="profile-title">Profile</a>
+              <a href="#/profile" class="profile__tab" data-lang="profile-title">Profile</a>
             </div>
             <div class="profile__nav-item">
-              <a href="#!" class="profile__tab" data-lang="profile-games">Games</a>
+              <a href="#/profile/games" class="profile__tab" data-lang="profile-games">Games</a>
             </div>
             <div class="profile__nav-item">
-              <a href="#!" class="profile__tab" data-lang="profile-reviews">Reviews</a>
+              <a href="#/profile/reviews" class="profile__tab" data-lang="profile-reviews">Reviews</a>
             </div>
           </div>
         </div>
@@ -203,21 +203,21 @@
           <div class="profile__stats-row">
             <div class="profile__stats-item">
               <div class="profile__stats-item__num" data-profile="wishlist">000</div>
-              <h4 class="profile__stats-item__name" data-lang="profile-stats-wishlist" ]>Games Wishlist</h4>
+              <h4 class="profile__stats-item__name" data-lang="profile-stats-wishlist">Games Wishlist</h4>
             </div>
             <div class="profile__stats-item">
               <div class="profile__stats-item__num" data-profile="total">000</div>
-              <h4 class="profile__stats-item__name" data-lang="profile-stats-total" ]>Total Games Played</h4>
+              <h4 class="profile__stats-item__name" data-lang="profile-stats-total">Total Games Played</h4>
             </div>
             <div class="profile__stats-item">
               <div class="profile__stats-item__num" data-profile="reviews">000</div>
-              <h4 class="profile__stats-item__name" data-lang="profile-stats-reviews" ]>Games Reviews</h4>
+              <h4 class="profile__stats-item__name" data-lang="profile-stats-reviews">Games Reviews</h4>
             </div>
           </div>
           <div class="profile__save">
-            <a data-json-file data-lang="profile-stats-download" ]>Click here to download save file</a>
+            <a data-json-file data-lang="profile-stats-download">Click here to download save file</a>
             <div class="profile__save-file">
-              <label for="fileInput" data-lang="profile-stats-file" ]>Drop your data file to return games</label>
+              <label for="fileInput" data-lang="profile-stats-file">Drop your data file to return games</label>
               <input type="file" id="fileInput" />
             </div>
           </div>
@@ -304,4 +304,3 @@
     </div>
   </body>
 </html>
-
