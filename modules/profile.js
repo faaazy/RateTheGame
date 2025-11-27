@@ -5,6 +5,8 @@ export function initProfile(cardsData) {
   const headerRow = document.querySelector(".header__row");
   const gamePage = document.querySelector(".game-page");
 
+  const redirectLink = document.querySelector("[data-redirect='reviews']");
+
   function getEnglishStatus(russianStatus) {
     const statusMap = {
       Все: "All",
@@ -14,6 +16,7 @@ export function initProfile(cardsData) {
       Желаемое: "Wishlist",
       Избранное: "Favorite",
     };
+
     return statusMap[russianStatus] || russianStatus;
   }
 
@@ -26,8 +29,31 @@ export function initProfile(cardsData) {
       Wishlist: "Желаемое",
       Favorite: "Избранное",
     };
+
     return statusMap[englishStatus] || englishStatus;
   }
+
+  document.addEventListener("click", (event) => {
+    if (event.target.matches('[data-redirect="reviews"]')) {
+      event.preventDefault();
+
+      catalog.classList.add("hidden");
+      gamePage.classList.add("hidden");
+      headerRow.classList.remove("header__row--mobile");
+      document.querySelector(".nav").classList.remove("nav--mobile");
+      document.querySelector(".menu-icon").classList.remove("menu-icon-active");
+
+      profile.classList.remove("hidden");
+      for (const elem of mainElems) {
+        elem.classList.add("hidden");
+      }
+
+      const reviewsTabBtn = document.querySelector('[data-tab="reviews"]');
+      if (reviewsTabBtn) {
+        reviewsTabBtn.click();
+      }
+    }
+  });
 
   headerRow.addEventListener("click", (event) => {
     if (event.target.closest(".logo") || event.target.closest(".nav__item")) {
@@ -146,7 +172,7 @@ export function initProfile(cardsData) {
           <div class="profile-game__item">
             <h2 class="profile-game__name">${title}</h2>
             <div class="profile-game__img">
-              <img src=${img} alt=${title}>
+              <img src=${img} alt=${title} title=${title}>
             </div>
             <div class="profile-game__selected">${russianStatus}</div>
           </div>
