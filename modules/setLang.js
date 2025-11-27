@@ -4,6 +4,7 @@ export const translations = {
     description:
       "RateTheGame - Platform for rating video games, writing reviews and tracking your game collection. Rate games, track completed and backlogged titles, organize by categories.",
     ogDesc: "RateTheGame - Platform for rating video games, writing reviews and tracking your game collection.",
+    keywords: "Game rating, review, game library, game collection tracking ,game backlog website, game tracker",
 
     nav: {
       profile: "Profile",
@@ -85,6 +86,8 @@ export const translations = {
     description:
       "RateTheGame — платформа для оценки видеоигр, написания рецензий и отслеживания игровой коллекции. Ставьте баллы играм, ведите списки пройденных и отложенных игр.",
     ogDesc: "RateTheGame — платформа для оценки видеоигр, написания рецензий и отслеживания игровой коллекции.",
+    keywords: "оценка игр, рецензии на игры, игровые рейтинги, моя игровая библиотека, отслеживание игр, игры по категориям, backlog игр, список игр, поставить оценку игре, написать рецензию на игру, игровой трекер, сайт для оценки видеоигр, пройденные игры, отложенные игры, игровая коллекция.
+",
 
     nav: {
       profile: "Профиль",
@@ -169,6 +172,7 @@ export function setLanguage(lang) {
 
   document.title = t.title;
   document.querySelector('meta[name="description"]').setAttribute("content", t.description);
+  document.querySelector('meta[name="keywords"]').setAttribute("content", t.keywords);
   document.querySelector("meta[property='og:title']").setAttribute("content", t.title);
   document.querySelector("meta[property='og:description']").setAttribute("content", t.ogDesc);
 
@@ -229,3 +233,4 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 });
+
