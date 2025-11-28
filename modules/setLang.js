@@ -36,6 +36,7 @@ export const translations = {
       reviewBtn: "Log or Review",
       steamReviews: "Steam Reviews",
       released: "Released on",
+      reviewsTitle: "Game Reviews",
     },
 
     catalog: {
@@ -116,6 +117,7 @@ export const translations = {
       reviewBtn: "Записать или оценить",
       steamReviews: "Отзывы Steam",
       released: "Выпущена",
+      reviewsTitle: "Рецензии на игру",
     },
 
     catalog: {

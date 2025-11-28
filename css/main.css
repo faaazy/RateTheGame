@@ -180,7 +180,6 @@ nav {
 
     a {
       text-decoration: underline;
-      
     }
   }
 }
@@ -845,6 +844,40 @@ label {
 }
 .game__release {
   margin-bottom: 15px;
+}
+
+.game-page__reviews {
+  margin-top: 40px;
+
+  h2 {
+    font-size: 20px;
+    font-weight: 600;
+  }
+}
+
+.game-page__reviews-item {
+  margin-block: 20px;
+  padding: 20px;
+
+  background-color: #575d7a;
+  border-radius: 15px;
+
+  .game-page__reviews-item__heading {
+    display: flex;
+    align-items: center;
+    column-gap: 15px;
+  }
+
+  .game-page__reviews-item__name {
+    font-size: 22px;
+    font-weight: 700;
+    color: #c0c6d4;
+  }
+
+  .game-page__reviews-item__text {
+    margin-top: 10px;
+    line-height: 1.5;
+  }
 }
 
 /* rating-box */
